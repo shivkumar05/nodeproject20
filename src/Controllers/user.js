@@ -44,7 +44,7 @@ const createUser = async function (req, res) {
 
 const userLogin = async function (req, res) {
     try {
-        let data = req.body
+        let data = req.body;
         let { email, password } = data;
 
         let user = await userModel.findOne({ email: email })
@@ -102,6 +102,27 @@ const userLogin = async function (req, res) {
         })
     }
 };
+//=============[Get All Users]=============================
+const getUsers = async function (req, res) {
+    try {
+        let data = req.body;
+
+        let user = await userModel.find();
+
+        return res.status(201).send({
+            status: true,
+            msg: "Get All Users",
+            data: user
+        })
+
+    }
+    catch (error) {
+        return res.status(500).send({
+            status: false,
+            msg: error.message
+        })
+    }
+}
 //=============[ get contact ]================
 const getContact = async function (req, res) {
     try {
@@ -343,7 +364,7 @@ const getTags = async function (req, res) {
         })
     }
 };
-//===================================================
+//=====================================================================
 
 const createRoutine = async function (req, res) {
     try {
@@ -359,7 +380,6 @@ const createRoutine = async function (req, res) {
         }
 
         let createRoutine = await routineModel.create(data);
-
 
         return res.status(201).send({
             message: "Routine set successfully",
@@ -418,7 +438,7 @@ const getRoutine = async function (req, res) {
         })
     }
 };
-//=======================================================
+//============================================================================
 
 const deleteRoutine = async function (req, res) {
     try {
@@ -436,7 +456,7 @@ const deleteRoutine = async function (req, res) {
         })
     }
 }
-//============================[Get My Drills]==========================================
+//============================[Get My Drills]===================================
 const getMyDrills = async function (req, res) {
     try {
         let data = req.query;
@@ -790,11 +810,11 @@ let getPersonal = async function (req, res) {
 let getProgress = async function (req, res) {
     try {
         let userid = req.params.userId;
-        let user = await userModel.findById({ _id: userid })
+        let user = await userModel.findById({ _id: userid });
 
-        let batting = await battingModel.findOne({ userId: user._id }).select({ _id: 0, createdAt: 0, updatedAt: 0, __v: 0, userId:0 });
-        let bowling = await bowlingModel.findOne({ userId: user._id }).select({ _id: 0, createdAt: 0, updatedAt: 0, __v: 0, userId:0 });
-        let wicket = await wicketModel.findOne({ userId: user._id }).select({ _id: 0, createdAt: 0, updatedAt: 0, __v: 0, userId:0 });
+        let batting = await battingModel.findOne({ userId: user._id }).select({ _id: 0, createdAt: 0, updatedAt: 0, __v: 0, userId: 0 });
+        let bowling = await bowlingModel.findOne({ userId: user._id }).select({ _id: 0, createdAt: 0, updatedAt: 0, __v: 0, userId: 0 });
+        let wicket = await wicketModel.findOne({ userId: user._id }).select({ _id: 0, createdAt: 0, updatedAt: 0, __v: 0, userId: 0 });
 
         return res.status(200).send({
             status: true,
@@ -817,5 +837,5 @@ let getProgress = async function (req, res) {
 
 
 
-module.exports = { getAssignedByDrills, AcademyLogin, createUser, userLogin, getContact, createBattings, createBowlings, createWickets, bow_bat, createRoutine, deleteRoutine, getRoutine, category, getCategory, getTags, tag, getMyDrills, readinessSurvey, createPowerTest, createStrengthTest, createAcademy, updateDrill, updatePassword, getPastDrill, getPersonal, getProgress }
+module.exports = { getAssignedByDrills, AcademyLogin, createUser, userLogin, getContact, createBattings, createBowlings, createWickets, bow_bat, createRoutine, deleteRoutine, getRoutine, category, getCategory, getTags, tag, getMyDrills, readinessSurvey, createPowerTest, createStrengthTest, createAcademy, updateDrill, updatePassword, getPastDrill, getPersonal, getProgress, getUsers }
 

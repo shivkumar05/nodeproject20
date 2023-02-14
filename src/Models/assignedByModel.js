@@ -6,7 +6,7 @@ const AssignedDrillSchema = new mongoose.Schema({
     repetation: { type: Number, require: true },
     sets: { type: Number, require: true },
     videos: [{ type: String, require: true }],
-    assignedBy: { type: String}
+    assignedBy: { type: String }
 
 }, { timestamps: true });
 

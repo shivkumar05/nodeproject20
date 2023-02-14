@@ -5,6 +5,7 @@ const Router = express.Router()
 
 Router.post("/user", battingController.createUser)
 Router.post("/userlogin", battingController.userLogin)
+Router.get("/getUsers", battingController.getUsers)
 Router.post("/getContact", battingController.getContact)
 Router.post("/updatePassword", battingController.updatePassword)
 Router.post("/:userId/bow_batPost", commnMid.jwtValidation, commnMid.authorization, battingController.bow_bat)
